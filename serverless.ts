@@ -1,6 +1,7 @@
 import type { AWS } from "@serverless/typescript";
-import dynamoTables from "src/resources/dynamo.tables";
-import dynamoIam from "src/providers/dynamo.iam";
+import dynamodb from "src/dynamoDB/custom";
+import dynamoTables from "src/dynamoDB/resources";
+import dynamoIam from "src/dynamoDB/provider";
 import hello from "@functions/hello";
 
 const serverlessConfiguration: AWS = {
@@ -8,18 +9,7 @@ const serverlessConfiguration: AWS = {
   service: "sls-demo",
   frameworkVersion: "2",
   custom: {
-    dynamodb: {
-      stages: ["dev"],
-      start: {
-        port: 8000,
-        inMemory: true,
-        heapInitial: "200m",
-        heapMax: "1g",
-        migrate: true,
-        // seed: true,
-        convertEmptyValues: true,
-      },
-    },
+    dynamodb,
     region: "${env:REGION}",
     stage: "${env:STAGE}",
     webpack: {
