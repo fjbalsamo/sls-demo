@@ -3,6 +3,7 @@ import dynamodb from "src/dynamoDB/custom";
 import dynamoTables from "src/dynamoDB/resources";
 import dynamoIam from "src/dynamoDB/provider";
 import hello from "@functions/hello";
+import users from "@functions/users";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -47,6 +48,7 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: {
     hello,
+    users,
   },
   resources: {
     Resources: dynamoTables,
